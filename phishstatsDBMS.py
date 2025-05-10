@@ -313,7 +313,11 @@ def generate_phishing_heatmap(cursor, output_file="phishing_heatmap.html", min_r
 
     m.save(output_file)
     print(f"Heatmap created successfully! Open the file {output_file} to view the result.")
-    webbrowser.open(output_file)
+    export = input("Would you like to open the file? ⚠️ This will only work on a local machine. If you're using Codespaces, it will disconnect. ⚠️ (y/n): ").strip().lower()
+    if export == "y":
+        webbrowser.open(output_file)
+    else:
+         print("")
     
 #generate_phishing_heatmap(cur, output_file="phishing_map.html")
 
@@ -358,7 +362,11 @@ def cluster_phishing_sites_kmeans(cursor, n_clusters=5, output_file="phishing_cl
 
     m.save(output_file)
     print(f"Cluster map created successfully → Open file: {output_file}")
-    webbrowser.open(output_file)
+    export = input("Would you like to open the file? ⚠️ This will only work on a local machine. If you're using Codespaces, it will disconnect. ⚠️ (y/n): ").strip().lower()
+    if export == "y":
+        webbrowser.open(output_file)
+    else:
+         print("")
     
 #cluster_phishing_sites_kmeans(cur, n_clusters=5)
 
@@ -623,7 +631,7 @@ def analyze_phishing_trends_by_quarter(cursor):
 
 
 
-def compare_data_before_after_update_to_csv(cursor, output_file="output.csv"):
+def compare_data_before_after_update_to_csv(cursor, output_file="compare_date.csv"):
 
     query = '''
     SELECT
@@ -667,6 +675,7 @@ def compare_data_before_after_update_to_csv(cursor, output_file="output.csv"):
                     'url': url,
                     'domain': domain
                 })
+            print(f"Compare data before and after created successfully! Open the file {output_file} to view the result.")
 
     else:
         print("No data with changes between date and date_update exceeding 6 months.")
